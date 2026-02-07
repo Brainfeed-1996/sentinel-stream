@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sentinel-stream"
+version = "0.1.0"
+description = "Local-first policy-driven telemetry pipeline with rules and append-only audit log"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Olivier Robert-Duboille" }]
+license = { text = "MIT" }
+dependencies = [
+  "pydantic>=2.6",
+  "pyyaml>=6.0",
+  "rich>=13.7",
+]
+
+[project.scripts]
+sentinel-stream = "sentinel_stream.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sentinel_stream*"]
+exclude = ["tests*", "rules*", "docs*"]
+
+[tool.pytest.ini_options]
+addopts = "-q"

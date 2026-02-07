@@ -1,0 +1,27 @@
+version: 1
+rules:
+  - id: FS_SUSPICIOUS_EXTENSIONS
+    name: Suspicious file extensions in user space
+    severity: medium
+    match:
+      type: fs.scan
+      where:
+        any_of:
+          - field: data.path
+            regex: "(?i)\\.(exe|dll|ps1|vbs|js)$"
+          - field: data.path
+            regex: "(?i)\\.(lnk|scr|bat|cmd)$"
+
+  - id: PROC_SUSPICIOUS_PARENTS
+    name: Suspicious parent-child process pairs
+    severity: high
+    match:
+      type: proc.snapshot
+      where:
+        any_of:
+          - field: data.chain
+            contains: "winword.exe -> powershell.exe"
+          - field: data.chain
+            contains: "excel.exe -> powershell.exe"
+          - field: data.chain
+            contains: "outlook.exe -> powershell.exe"
