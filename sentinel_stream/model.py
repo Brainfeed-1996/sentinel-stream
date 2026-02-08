@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -11,7 +11,7 @@ class Event(BaseModel):
     host: str
     source: str
     type: str
-    data: Dict[str, Any] = Field(default_factory=dict)
+    data: dict[str, Any] = Field(default_factory=dict)
 
 
 class Detection(BaseModel):
@@ -26,5 +26,5 @@ class Detection(BaseModel):
 class AuditRecord(BaseModel):
     kind: Literal["detection"]
     detection: Detection
-    prev_hash: Optional[str] = None
+    prev_hash: str | None = None
     hash: str

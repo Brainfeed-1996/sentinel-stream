@@ -1,4 +1,4 @@
-from sentinel_stream.rules import validate_rules, load_rules
+from sentinel_stream.rules import load_rules, validate_rules
 
 
 def test_default_rules_validate():

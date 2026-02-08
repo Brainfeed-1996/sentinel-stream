@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, List, Optional
 
 from .audit import append_detection, verify_chain
 from .model import Detection, Event
@@ -16,8 +16,13 @@ class RunResult:
     audit_ok: bool
 
 
-def run_pipeline(host: str, events: Iterable[Event], rules: List[Rule], out_file: Path) -> RunResult:
-    prev_hash: Optional[str] = None
+def run_pipeline(
+    host: str,
+    events: Iterable[Event],
+    rules: list[Rule],
+    out_file: Path,
+) -> RunResult:
+    prev_hash: str | None = None
     # find last hash if file exists
     if out_file.exists():
         # verify and also recover last hash

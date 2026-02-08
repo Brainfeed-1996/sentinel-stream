@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import yaml
 
@@ -13,11 +13,11 @@ class Rule:
     name: str
     severity: str
     event_type: str
-    where: Dict[str, Any]
+    where: dict[str, Any]
 
 
-def load_rules(path: str) -> List[Rule]:
-    doc = yaml.safe_load(open(path, "r", encoding="utf-8"))
+def load_rules(path: str) -> list[Rule]:
+    doc = yaml.safe_load(open(path, encoding="utf-8"))
     rules = []
     for r in doc.get("rules", []):
         m = r.get("match", {})
@@ -33,7 +33,7 @@ def load_rules(path: str) -> List[Rule]:
     return rules
 
 
-def _get_field(obj: Dict[str, Any], dotted: str) -> Optional[str]:
+def _get_field(obj: dict[str, Any], dotted: str) -> str | None:
     parts = dotted.split(".")
     cur: Any = obj
     for p in parts:
@@ -44,7 +44,7 @@ def _get_field(obj: Dict[str, Any], dotted: str) -> Optional[str]:
     return None if cur is None else str(cur)
 
 
-def _match_clause(event: Dict[str, Any], clause: Dict[str, Any]) -> bool:
+def _match_clause(event: dict[str, Any], clause: dict[str, Any]) -> bool:
     field = clause.get("field")
     if not field:
         return False
@@ -61,7 +61,7 @@ def _match_clause(event: Dict[str, Any], clause: Dict[str, Any]) -> bool:
     return False
 
 
-def rule_matches(rule: Rule, event: Dict[str, Any]) -> bool:
+def rule_matches(rule: Rule, event: dict[str, Any]) -> bool:
     if rule.event_type and event.get("type") != rule.event_type:
         return False
 
@@ -77,8 +77,8 @@ def rule_matches(rule: Rule, event: Dict[str, Any]) -> bool:
     return False
 
 
-def validate_rules(path: str) -> List[str]:
-    errs: List[str] = []
+def validate_rules(path: str) -> list[str]:
+    errs: list[str] = []
     try:
         rules = load_rules(path)
     except Exception as e:

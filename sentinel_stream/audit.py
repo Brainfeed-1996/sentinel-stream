@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable, Optional
 
 from .model import AuditRecord, Detection
 
@@ -12,7 +12,7 @@ def _sha256_hex(s: str) -> str:
     return hashlib.sha256(s.encode("utf-8")).hexdigest()
 
 
-def append_detection(out_file: Path, detection: Detection, prev_hash: Optional[str]) -> str:
+def append_detection(out_file: Path, detection: Detection, prev_hash: str | None) -> str:
     payload = {
         "kind": "detection",
         "detection": detection.model_dump(),
