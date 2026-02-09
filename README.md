@@ -17,6 +17,7 @@ It is built to be:
 ## Notebooks
 
 - `notebooks/01_streaming_anomaly_detection.ipynb` — streaming-style anomaly scoring + alerting baseline
+- `notebooks/02_concept_drift_ewma_detector.ipynb` — EWMA concept drift detector (executed outputs saved)
 
 ## Quickstart
 ```bash
