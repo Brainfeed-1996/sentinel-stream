@@ -14,6 +14,10 @@ It is built to be:
 - Append-only JSONL audit log + integrity chain (hash linking)
 - CLI to run, validate rules, and query the audit log
 
+## Notebooks
+
+- `notebooks/01_streaming_anomaly_detection.ipynb` — streaming-style anomaly scoring + alerting baseline
+
 ## Quickstart
 ```bash
 python -m venv .venv
