@@ -1,0 +1,8 @@
+line-length = 100
+
+[lint]
+select = ["E", "F", "I", "B", "UP", "RUF"]
+
+[lint.per-file-ignores]
+"sentinel_stream/cli.py" = ["B008"]
+"tests/**" = ["S101"]
