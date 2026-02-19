@@ -58,5 +58,9 @@ Detections are written as audit records that include:
 - Live mode with periodic collection
 - Rule packs (baseline hardening, dev workstation, server)
 
+## Engineering maturity
+- **Complexity tier:** Tier 3 (modular package, typed models, test suite, CI quality gates)
+- CI now enforces lint + mypy + coverage threshold.
+
 ## License
 MIT
